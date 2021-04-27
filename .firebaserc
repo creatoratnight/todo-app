@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todo-app-ceca6": {
+      "hosting": {
+        "todo-app": [
+          "todo-app-ceca6"
+        ]
+      }
+    }
+  }
+}
