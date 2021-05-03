@@ -1,7 +1,26 @@
-<app-navbar></app-navbar>
+<app-navbar [isSignedIn]="isSignedIn"></app-navbar>
+
 <div class="app">
   <div class="container">
-    <router-outlet></router-outlet>
+    <router-outlet *ngIf="isSignedIn"></router-outlet>
+    <div class="d-flex justify-content-center form-signin-wrapper">
+      <div class="row col-md-6" *ngIf="!isSignedIn">
+        <input type="text" #email class="form-control-plaintext form-signin" placeholder="Username"/>
+        <input type="password" #password class="form-control-plaintext form-signin" placeholder="Password"/>
+        <div style="width: 100%">
+          <button class="btn btn-primary float-right col-md-12 btn-signin btn-block" (click)="onSignin(email.value, password.value)">Sign in</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- SIGNUP <div *ngIf="!isSignedIn">
+  <h2>Sign up</h2>
+  <input type="text" #emailSignup/>
+  <input type="text" #passwordSignup/>
+  <button (click)="onSignup(emailSignup.value, passwordSignup.value)">Sign up</button>
+</div>
+<hr> -->
+
 <app-footer></app-footer>

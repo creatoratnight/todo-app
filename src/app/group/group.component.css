@@ -176,11 +176,6 @@ h3 {
     text-orientation: mixed;
 }
 
-.category-group:hover {
-    cursor: pointer;
-    background-color: #333;
-}
-
 .form-category {
     width: 580px;
     margin-right: -100px;
@@ -251,4 +246,19 @@ select:focus {
 
 .btn-delete-modal-no:focus {
     outline: none;
+}
+
+h1 {
+    color: #fdd617;
+    margin-bottom: 30px;
+}
+
+h3 .todo-breadcrumb{
+    color: #fdd617;
+    font-weight: 100;
+}
+
+a {
+    color: #fdd617 !important;
+    font-weight: 100;
 }

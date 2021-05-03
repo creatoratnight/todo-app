@@ -1,9 +1,11 @@
+import { unsupported } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../service/category.service';
-import { TodoService } from '../service/todo.service';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { GroupsService } from '../service/groups.service';
+import { TodoService } from '../service/todo.service';
 
 @Component({
   selector: 'ngbd-modal-confirm-autofocus',
@@ -16,21 +18,21 @@ import { GroupsService } from '../service/groups.service';
     <button type="button" class="btn btn-delete-modal-yes" (click)="modal.close('Ok click')">Yes</button>
   </div>
   `,
-  styleUrls: ['./category.component.css']
+  styleUrls: ['../category/category.component.css']
 })
 export class NgbdModalConfirmAutofocus {
   constructor(public modal: NgbActiveModal) {}
 }
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
+  selector: 'app-group',
+  templateUrl: './group.component.html',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./group.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class GroupComponent implements OnInit {
 
-  color: Array<any> = ['#e7845e', '#fc0184', '#f6b93f', '#9224a7'];
+  groupId: string;
   categories: Array<object> = [];
   categoryGroups: Array<object> = [];
   categoryGroup: string= "Uncategorized";
@@ -49,9 +51,17 @@ export class CategoryComponent implements OnInit {
   todayNextWeek: string;
   deleteConfirmName: string;
 
-  constructor( private categoryService: CategoryService, private todoService: TodoService, private groupsService: GroupsService, private modalService: NgbModal ) { }
+  constructor(
+    private categoryService: CategoryService, 
+    private todoService: TodoService, 
+    private activatedRoute: ActivatedRoute,
+    private groupsService: GroupsService,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
+    this.groupId = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.dd = String(this.todayDate.getDate()).padStart(2, '0');
     this.mm = String(this.todayDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     this.yyyy = String(this.todayDate.getFullYear());
@@ -84,29 +94,25 @@ export class CategoryComponent implements OnInit {
       subCat.unsubscribe();
     });
 
-    this.groupsService.loadGroups().subscribe(val => {
-      this.categoryGroups = [...val, {data: {group: 'Uncategorized'}}];
-      console.log(this.categoryGroups);
+    let subGroups = this.groupsService.loadGroups().subscribe(val => {
+      this.categoryGroups = [...val, {data: {group: 'Uncategorized'}}, {data: {group: 'Deleted'}}];
+      subGroups.unsubscribe();
     });
   }
 
   onSubmit(f:NgForm) {
     if (this.dataStatus == "Add") {
-      let randomNumber = Math.floor(Math.random() * this.color.length);
       let todoCategory = {
         category: f.value.categoryName,
-        categoryGroup: f.value.categoryGroup,
-        colorCode: this.color[randomNumber],
+        categoryGroup: this.groupId,
         todoCount: 0
       }
       this.categoryService.saveCategory(todoCategory);
       f.resetForm();
-      this.categoryGroup = "Uncategorized";
     } else if (this.dataStatus == "Update") {
-      this.categoryService.updateCategory(this.catId, f.value.categoryName, f.value.categoryGroup);
+      this.categoryService.updateCategory(this.catId, f.value.categoryName, this.groupId);
       f.resetForm();
       this.dataStatus = "Add";
-      this.categoryGroup = "Uncategorized";
     }
     
   }
@@ -116,10 +122,10 @@ export class CategoryComponent implements OnInit {
     this.dataStatus = "Update";
     this.catId = id;
     this.categoryGroup = group;
-    console.log(this.categoryGroup);
   }
 
   onDelete(id:string, category:string) {
+    this.deleteConfirmName = "Testname";
     this.categoryService.deleteCategory(id);
   }
 
@@ -127,10 +133,10 @@ export class CategoryComponent implements OnInit {
     let modalRef = this.modalService.open(NgbdModalConfirmAutofocus, {centered: true, windowClass: 'delete-modal'});
     modalRef.result.then((data) => {
       //on close
-      console.log(catId);
       this.categoryService.deleteCategory(catId);
     }, (reason) => {
       //on dismiss
     });
   }
+
 }

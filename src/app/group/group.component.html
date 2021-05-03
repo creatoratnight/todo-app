@@ -1,0 +1,59 @@
+<div class="row justify-content-center md-3">
+    <div class="col-md-12 text-center" *ngIf="category">
+        <h3 class="todo-breadcrumb"><a href="/">Todo</a> ></h3><h1>{{ groupId | titlecase }}</h1>
+        <!-- <p class="text-info">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p> -->
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <form #f="ngForm" (ngSubmit)='f.form.valid && onSubmit(f)' class="form-inline">
+            <div class="col-md-10 form-group">
+                <input type="text" placeholder="Add new categories here" name="categoryName" class="form-inline form-category" [(ngModel)]="categoryName" required #category='ngModel' [ngClass]="{'border-danger': f.submitted && category.invalid}">
+            </div>
+            <button type="submit" class="btn btn-primary col-md-2 btn-todo btn-block">{{ dataStatus }}</button>
+            <div class="text-danger ml-3" *ngIf="f.submitted && category.invalid && category.errors.required">
+                Category is required
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row col-lg-12 categories-list" *ngFor="let group of categoryGroups">
+    <ng-container *ngIf="group.data.group == groupId">
+        <div class="col-lg-1 justify-content-center category-group-border">
+            <h3 class="category-group">{{ group.data.group }}</h3>
+        </div>
+        <div class="row col-lg-11">
+            <div class="col-lg-12 justify-content-center category-group-hr"></div>
+            <ng-container *ngFor="let category of categories">
+                <div class="col-md-3" *ngIf="category.data.categoryGroup == group.data.group">
+                    <div class="card" [ngClass]="{'card-completed': category.data.todoCount == 0, 'card-next-week': category.categoryDueState == 1, 'card-overdue': category.categoryDueState == 2}"> <!--[style.border-left-color]="category.data.colorCode"-->
+                        <div class="card-body" [routerLink]="['/todo', category.id]">
+                            <div class="clearfix">
+                                <!-- <div class="float-left">
+                                    <div class="badge badge-primary">CATEGORY</div>
+                                </div> -->
+                            </div>
+                            <div class="todo-content">
+                                <h3 [ngClass]="{'h3-completed': category.data.todoCount == 0}">{{ category.data.category }}</h3>
+                                <!-- <small class="text-secondary">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</small> -->
+                            </div>
+                            <span class="badge badge-danger" *ngIf="category.data.todoCount > 1">{{ category.data.todoCount }} Items</span>
+                            <span class="badge badge-danger" *ngIf="category.data.todoCount == 1">{{ category.data.todoCount }} Item</span>
+                            <span class="badge badge-done" *ngIf="category.data.todoCount == 0">Done!</span>
+                        </div>
+                        <div class="card-body-tools">
+                            <div class="float-right cat-tools">
+                                <small><i class="fa fa-pencil-alt text-warning" (click)="onEdit(category.data.category, category.data.categoryGroup, category.id)"></i></small>
+                                <small><i class="fas fa-trash text-danger" (click)="openModal(category.id)"></i></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

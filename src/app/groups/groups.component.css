@@ -1,0 +1,74 @@
+.form-group {
+    width: 760px;
+}
+
+.group-list {
+    margin-top: 50px;
+}
+
+.group-list .card {
+    border: none;
+    color: #ddd !important;
+    margin-top: 10px;
+    padding-left: 15px;
+    background-color: #000;
+    border-left: 5px solid #0000;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-left-color: #fdd617;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+    box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+}
+
+.group-tools {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-top: -45px;
+    padding: 0px 0px 3px 15px;
+    background-color: #333;
+    max-width: 100px;
+    display: none;
+}
+
+.group-tools i {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.group-list .card:hover {
+    cursor: pointer;
+    padding-left: 0px;
+    background-color: #111;
+    border-left: 20px solid #0000;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-left-color: #fdd617;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+    box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+}
+
+.group-list .card:hover .group-tools {
+    display: inline;
+}
+
+i {
+    color: #ddd;
+    font-style: normal;
+    margin-right: 20px;
+}
+
+h1 {
+    color: #fdd617;
+    margin-bottom: 30px;
+}
+
+.deleted-link {
+    margin-top: 50px;
+}
+
+.deleted-link a {
+    color: #dc3545 !important;
+    font-size: 1.6rem;
+}

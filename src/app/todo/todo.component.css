@@ -4,41 +4,163 @@
 
 .todo-list .card {
     border: none;
-    margin-top: 5px;
-    background-color: #f8f8f8;
+    color: #ddd !important;
+    min-height: 64px;
+    margin-top: 10px;
+    padding-left: 15px;
+    background-color: #000;
+    border-left: 5px solid #0000;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-left-color: #fdd617;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+    box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 0.472);
+}
+
+.todo-list .card-completed {
+    border-left-color: #28a745;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 0.472);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 0.472);
+    box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 0.472);
+}
+
+.todo-list .card-next-week {
+    border-left-color: #ec852e;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 0.472);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 0.472);
+    box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 0.472);
+}
+
+.todo-list .card-overdue {
+    border-left-color: #dc3545;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 0.472);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 0.472);
+    box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 0.472);
 }
 
 .todo-tools {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-top: -45px;
+    padding: 0px 0px 3px 15px;
+    background-color: #333;
+    max-width: 100px;
     display: none;
 }
 
 .todo-tools i {
-    margin: 0px 5px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
 .todo-list .card:hover {
     cursor: pointer;
-    width: 600px;
-    height: 80px;
-    margin-left: -30px;
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    padding-left: 0px;
+    background-color: #111;
+    border-left: 20px solid #0000;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    border-left-color: #fdd617;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+    box-shadow: 0px 0px 23px -10px rgba(255, 238, 0, 1);
+}
+
+.todo-list .card-completed:hover {
+    border-left-color: #28a745;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 1);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 1);
+    box-shadow: 0px 0px 23px -10px rgba(0, 255, 21, 1);
+}
+
+.todo-list .card-next-week:hover {
+    border-left-color: #ec852e;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 1);
+    box-shadow: 0px 0px 23px -10px rgba(255, 115, 0, 1);
+}
+
+.todo-list .card-overdue:hover {
+    border-left-color: #dc3545;
+    -webkit-box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 1);
+    -moz-box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 1);
+    box-shadow: 0px 0px 23px -10px rgba(255, 0, 0, 1);
 }
 
 .todo-list .card:hover .todo-tools {
     display: inline;
 }
+
 i {
+    color: #ddd;
+    font-style: normal;
     margin-right: 20px;
+}
+
+.card-body {
+    padding: 1.25rem;
+    width: 570px;
+}
+
+.card-next-week .card-body i {
+    color: #ec852e !important;
+    font-weight: 300;
+}
+
+.card-overdue .card-body i {
+    color: #dc3545 !important;
+    font-weight: 500;
+}
+
+.todo-completed {
+    color: #888 !important;
+}
+
+.todo-due-date {
+    margin-top: 1px;
+    margin-right: 20px;
+    font-size: .9rem;
+    color: #aaa;
+}
+
+.form-todo {
+    width: 760px;
+    margin-right: -100px;
+}
+
+.form-select-date {
+    margin-left: -120px;
+    border: none;
+    color: #ddd;
+    background-color: #000;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 hr {
     display: block;
-    margin-top: -11px;
+    margin-top: -12px;
     margin-left: 30px;
     margin-right: auto;
     border-style: inset;
     border-width: 1px;
     background-color: black;
+}
+
+h1 {
+    color: #fdd617;
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #fdd617;
+    font-weight: 100;
+}
+
+a {
+    color: #fdd617 !important;
+    font-weight: 100;
 }

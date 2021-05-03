@@ -13,6 +13,10 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { TodoComponent } from './todo/todo.component';
+import { HomeComponent } from './home/home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GroupsComponent } from './groups/groups.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { TodoComponent } from './todo/todo.component';
     NavbarComponent,
     FooterComponent,
     CategoryComponent,
-    TodoComponent
+    TodoComponent,
+    HomeComponent,
+    GroupsComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,8 @@ import { TodoComponent } from './todo/todo.component';
     AngularFirestoreModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
