@@ -70,7 +70,7 @@ export class CategoryComponent implements OnInit {
           let todos = val;
           let state = 0;
           for (let todo of todos) {
-            if (Date.parse(this.today) > Date.parse(todo.data.todoDueDate) && todo.data.isCompleted == false) {
+            if (Date.parse(this.today) >= Date.parse(todo.data.todoDueDate) && todo.data.isCompleted == false) {
               state = 2;
             }
             if (Date.parse(this.todayNextWeek) > Date.parse(todo.data.todoDueDate) && todo.data.isCompleted == false && state != 2) {
@@ -84,9 +84,10 @@ export class CategoryComponent implements OnInit {
       subCat.unsubscribe();
     });
 
-    this.groupsService.loadGroups().subscribe(val => {
+    let subGroups = this.groupsService.loadGroups().subscribe(val => {
       this.categoryGroups = [...val, {data: {group: 'Uncategorized'}}];
       console.log(this.categoryGroups);
+      subGroups.unsubscribe();
     });
   }
 
